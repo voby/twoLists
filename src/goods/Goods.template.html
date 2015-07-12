@@ -1,0 +1,16 @@
+<div class="goods">
+	<button class="show-button" ng-click="goodsCtrl.toggle()">Show/hide</button>
+	<section ng-show="goodsCtrl.showList">	
+		<input ng-model="goodsCtrl.searchQuery" type="text" placeholder="Search">
+
+		<ul>
+			<li ng-repeat="item in goodsCtrl.list | filter:goodsCtrl.searchQuery track by $index">{{item.name}} - {{item.price | currency}}</li>
+		</ul>
+		<span>Total: {{goodsCtrl.list.length}}</span>
+
+		<form name='goodsForm' ng-submit="goodsForm.$valid && goodsCtrl.onSubmit(goodsCtrl.itemName)">
+			<input ng-model="goodsCtrl.itemName" type="text" placeholder="item" ng-pattern="/(\w+)$/" ng-required="true"/>
+			<button class="add">Add item</button>
+		</form>
+	</section>
+</div>	

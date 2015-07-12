@@ -1,0 +1,21 @@
+<div class="people">
+	<button class="show-button" ng-click="peopleCtrl.toggleList()">Show/hide</button>
+	<section ng-show="peopleCtrl.showList">	
+		<input ng-model="peopleCtrl.searchQuery.name" type="text" placeholder="Search">
+
+		<ul>
+			<li ng-repeat="person in peopleCtrl.list | filter:peopleCtrl.searchQuery track by $index">
+				<img ng-src="static/{{person.userpic}}.jpg" alt="">
+				<span class="people-text">User: {{person.name | uppercase}} - {{person.age}}, {{person.city}}</span>
+				<button ng-click="peopleCtrl.deletePerson($index)">Delete</button>
+			</li>
+		</ul>
+		<span>Total: {{peopleCtrl.list.length}}</span>
+
+		<form name='peopleForm' ng-submit="peopleForm.$valid && peopleCtrl.addPerson(peopleCtrl.personName, peopleCtrl.personCity)">
+			<input ng-model="peopleCtrl.personName" type="text" placeholder="name" ng-pattern="/(\w+)$/" ng-required="true"/>
+			<input ng-model="peopleCtrl.personCity" type="text" placeholder="city" ng-pattern="/(\w+)$/" ng-required="true"/>
+			<button class="add">Add user</button>
+		</form>
+	</section>
+</div>	
